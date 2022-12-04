@@ -6,7 +6,20 @@
 
 from typing import List
 
-
+nums = [3, 2, 4]
+target = 6
+# iterate over the array
+# take one value and see
 class Solution:
     def twoSum(self, nums: List[int], target: int) -> List[int]:
-        pass
+        prevMap = {}
+        for i, n in enumerate(nums):
+            diff = target - n
+            if diff in prevMap:
+                return [prevMap[diff], i]
+            prevMap[n] = i
+        return False
+
+
+test_solution = Solution()
+print(test_solution.twoSum(nums, target))
