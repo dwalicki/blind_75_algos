@@ -4,17 +4,27 @@
 # word or phrase, typically using all the original letters exactly once.
 
 from typing import List
-import collections
+from collections import defaultdict
 
 strs = ["eat", "tea", "tan", "ate", "nat", "bat"]
 
 
 class Solution:
     def groupAnagram(self, strs: List[str]) -> List[List[str]]:
-        hmap = collections.defaultdict(list)
-        for st in strs:
-            array = [0] * 26
-            for l in st:
-                array[ord(l) - ord("a")] += 1
-            hmap[tuple(array)].append(st)
-        return hmap.values()
+        res = defaultdict(list)  # mapping charCount to list of Anagrams
+
+        for s in strs:
+            count = [0] * 26  # a.....z
+
+            for c in s:
+                count[ord(c) - ord("a")] += 1
+
+            res[tuple(count)].append(s)
+
+        return res.values()
+
+        # O(m * n) - m = number of words given, n = length of each word
+
+
+test_solution = Solution()
+test_solution.groupAnagram(strs)
